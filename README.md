@@ -1,208 +1,183 @@
-\# Business Expense Analyzer
+# Business Expense Analyzer
 
+A reusable Python program that loads business expense data from a CSV file, analyzes key spending metrics, and generates a formatted summary report.
 
+## Overview
 
-A reusable Python program that analyzes business expenses and generates a formatted summary report.
+The Business Expense Analyzer is a Python program designed to analyze structured business expense data and generate a summary of key spending metrics.
 
+The program loads expense records from a CSV file using Python's built-in `csv` module and `DictReader`. The records are converted into a list of dictionaries so they can be processed by reusable analysis functions.
 
+The user can also enter a spending threshold when running the program. The threshold is validated to ensure that it is a positive number before the analysis is performed.
 
-\## Overview
+The program calculates:
 
+* Total expenses
+* Average expense
+* Largest expense and its category
+* Number of expenses above a user-defined threshold
 
+This project demonstrates how data can move from a structured external file into a Python analysis workflow while keeping the analysis functions reusable.
 
-The Business Expense Analyzer is a reusable Python program that analyzes business expense records and generates a summary of key spending metrics. It calculates total expenses, average expense, the largest expense amount and category, and the number of expenses above a specified threshold.
+## Features
 
+* Loads business expense data from a CSV file.
+* Uses `csv.DictReader` to read structured records.
+* Converts CSV values from strings into appropriate Python data types.
+* Stores expense records using a list of dictionaries.
+* Calculates total business expenses.
+* Calculates the average expense.
+* Identifies the largest expense amount and its category.
+* Allows the user to enter a custom spending threshold.
+* Validates the threshold to ensure it is greater than zero.
+* Handles invalid numeric input using `try`/`except`.
+* Counts the number of expenses above the selected threshold.
+* Displays expense records in a formatted report.
+* Generates a summary containing the key spending metrics.
 
-
-The program is designed to be reusable, allowing users to update expense amounts, add new categories, or remove existing categories while keeping the same analysis functions. The results can help provide a simple overview of business spending and support expense-related decision-making.
-
-
-
-\## Features
-
-
-
-\- Stores business expenses using a list of dictionaries.
-
-\- Calculates total business expenses.
-
-\- Calculates the average expense.
-
-\- Identifies the largest expense amount and its category.
-
-\- Counts the number of expenses above a specified threshold.
-
-\- Displays individual expense categories and amounts in a formatted report.
-
-\- Generates a summary report containing the key spending metrics.
-
-
-
-\## What I Learned
-
-
+## What I Learned
 
 Through this project, I practiced and strengthened the following Python concepts:
 
+* Using `for` and `while` loops to process data and repeat operations.
+* Working with lists and dictionaries.
+* Creating and working with lists of dictionaries to represent structured business data.
+* Accessing dictionary values using keys.
+* Defining functions and using parameters to make code reusable.
+* Using `return` to send calculated results from functions.
+* Combining multiple functions to build a larger analysis program.
+* Using accumulators to calculate totals.
+* Using counters to count records that meet specific conditions.
+* Using conditional statements to apply business rules.
+* Using `try`/`except` to handle invalid numeric input.
+* Using Boolean variables to track validation state.
+* Working with CSV files using Python's built-in `csv` module.
+* Using `csv.DictReader` to read CSV data using column names.
+* Converting CSV values from strings into numeric data types using `float()`.
+* Separating data loading from data analysis.
+* Protecting calculations from division-by-zero errors.
+* Using formatted strings (`f-strings`) to present numerical results clearly.
+* Formatting output using field width, alignment, and number formatting.
+* Using Git and GitHub to track and document project development.
 
+## How It Works
 
-\- Using `for` and `while` loops to repeat operations and process data.
+1. The program opens `expenses.csv` and uses `csv.DictReader` to read the expense records.
 
-\- Working with lists and dictionaries and understanding the difference between them.
+2. Each CSV row is converted into a Python dictionary containing a `category` and an `amount`.
 
-\- Creating and working with lists of dictionaries to represent structured business data.
+3. The dictionaries are stored in an `expenses` list.
 
-\- Accessing, updating, and adding items to dictionaries within a list.
+4. The program asks the user to enter an expense threshold.
 
-\- Defining functions and using parameters to make code reusable.
+5. The threshold is converted to a `float` and validated. The program rejects non-numeric values and thresholds that are zero or negative.
 
-\- Using `return` to send calculated results from functions.
+6. The `calculate_total()` function loops through the expense records and adds the amounts together.
 
-\- Using functions together to build a larger analysis program.
+7. The `calculate_average()` function counts the expense records and calculates the average expense. It also handles the case where there are no expense records.
 
-\- Using accumulators to calculate totals and counters to count records that meet specific conditions.
+8. The `find_largest_expense()` function compares expense amounts and identifies both the largest amount and its category.
 
-\- Using conditional statements to analyze data based on thresholds.
+9. The `expenses_above_threshold()` function compares each expense against the user-defined threshold and counts the expenses whose amounts are greater than it.
 
-\- Using formatted strings (`f-strings`) to present numerical results clearly.
+10. The `analyze_expenses()` function brings the individual analysis functions together and returns the key results.
 
-\- Formatting output using field width and left alignment to create organized reports.
+11. Formatted `print()` statements display the expense records and calculated results in a structured summary report.
 
-\- Structuring console output with headings, spacing, and summary sections to make results easier to read.
+## Example Output
 
+```text
+Enter expense threshold: 500
+Thank You!
 
+BUSINESS EXPENSE ANALYZER
 
-\## How It Works
+EXPENSES
+-------------------------
+Rent                : GHS 2,000.00
+Salaries            : GHS 4,500.00
+Marketing           : GHS 1,200.00
+Transport           : GHS 600.00
+Utilities           : GHS 450.00
+Software            : GHS 750.00
 
+SUMMARY
+-------------------------
+Total expenses:           GHS 9,500.00
+Average expense:          GHS 1,583.33
+Largest expense:          Salaries
+Largest amount:           GHS 4,500.00
+Expenses above GHS 500.00: 5
+```
 
+## Technologies Used
 
-1\. Business expenses are stored in a list of dictionaries, with each dictionary containing an expense category and amount.
+* Python 3
+* Python `csv` module
+* Python IDLE
+* Git
+* GitHub
 
-2\. The `calculate\_total()` function loops through the expense records, adds the amounts together, and returns the total.
+## Project Structure
 
-3\. The `calculate\_average()` function counts the number of expense records and uses the total expense value to calculate the average expense.
+```text
+business_expense_analyzer/
+│
+├── business_expense_analyzer.py
+├── expenses.csv
+└── README.md
+```
 
-4\. The `find\_largest\_expense()` function loops through the records and compares each amount with the current largest amount. When it finds a larger amount, it stores both the amount and its corresponding category.
+### `business_expense_analyzer.py`
 
-5\. The `expenses\_above\_threshold()` function checks each expense against a specified threshold and counts the expenses whose amounts are greater than that threshold.
+Contains the Python program used to load, analyze, validate, and report business expense data.
 
-6\. The `analyze\_expenses()` function brings the individual analysis functions together and returns all the key results.
+### `expenses.csv`
 
-7\. Finally, formatted `print()` statements display the expense records and calculated results in a structured summary report.
+Contains the business expense records used by the analyzer.
 
+### `README.md`
 
+Contains the project documentation, including the project overview, features, concepts learned, workflow, example output, and future improvements.
 
-\## Example Output
-
-
-
-&#x20;   BUSINESS EXPENSE ANALYZER
-
-
-
-&#x20;   EXPENSES
-
-&#x20;   -------------------------
-
-&#x20;   Rent                : GHS 2,000.00
-
-&#x20;   Salaries            : GHS 4,500.00
-
-&#x20;   Marketing           : GHS 1,200.00
-
-&#x20;   Transport           : GHS 600.00
-
-&#x20;   Utilities           : GHS 450.00
-
-&#x20;   Software            : GHS 750.00
-
-
-
-&#x20;   SUMMARY
-
-&#x20;   -------------------------
-
-&#x20;   Total expenses:           GHS 9,500.00
-
-&#x20;   Average expense:          GHS 1,583.33
-
-&#x20;   Largest expense:          Salaries
-
-&#x20;   Largest amount:           GHS 4,500.00
-
-&#x20;   Expenses above GHS 1000:  3
-
-
-
-\## Technologies Used
-
-
-
-\- Python 3
-
-\- Python IDLE
-
-\- Git and GitHub
-
-
-
-\## Project Structure
-
-
-
-&#x20;   business\_expense\_analyzer/
-
-&#x20;   │
-
-&#x20;   ├── business\_expense\_analyzer.py
-
-&#x20;   └── README.md
-
-
-
-\### `business\_expense\_analyzer.py`
-
-
-
-Contains the Python program used to store, analyze, and report business expense data.
-
-
-
-\### `README.md`
-
-
-
-Contains the project documentation, including the project overview, features, concepts learned, how the program works, and example output.
-
-
-
-\## Future Improvements
-
-
+## Future Improvements
 
 Possible improvements for future versions include:
 
+* Allowing users to enter new expense records directly through the program.
+* Adding percentage calculations to show how much each category contributes to total expenses.
+* Adding more detailed expense categories and analysis.
+* Adding charts and visualizations to make spending patterns easier to understand.
+* Using pandas for more advanced data analysis.
+* Adding additional business spending metrics.
+* Improving the user interface and report presentation.
 
+## Project Evolution
 
-\- Allowing users to enter expenses directly through the program instead of updating the expense list manually.
+This project was developed incrementally as I progressed through my Python learning journey. Each major stage was committed to Git so the development process can be reviewed through the repository's commit history.
 
-\- Allowing users to choose their own threshold when running the program.
+### Version 1 — Initial Analyzer
 
-\- Adding percentage calculations to show how much each category contributes to total expenses.
+- Stored expenses directly in Python using a list of dictionaries.
+- Added reusable functions for total, average, largest expense, and threshold analysis.
+- Generated a formatted console report.
 
-\- Adding more detailed expense categories and analysis.
+### Version 2 — CSV Data & Validation
 
-\- Allowing expense data to be imported from a CSV file.
+- Moved expense data into a CSV file.
+- Added CSV loading using `csv.DictReader`.
+- Added user-defined expense thresholds.
+- Added input validation using `try`/`except`.
+- Added protection against calculating an average from an empty dataset.
 
-\- Adding charts and visualizations to make spending patterns easier to understand.
+The Git history contains the commits showing how the project evolved from the initial analyzer to the current version.
 
-\- Connecting the project to more advanced data analysis tools such as pandas.
+## Project Status
 
+**Current version:** CSV-based business expense analysis with configurable threshold validation.
 
+The project has evolved from a hard-coded Python expense analyzer into a program that separates data loading, validation, analysis, and reporting.
 
-\## Disclaimer
+## Disclaimer
 
-
-
-This project is a Python learning project designed to demonstrate basic data storage, analysis, and reporting techniques. The results are based solely on the data entered into the program and should not be considered professional financial or accounting advice.
-
+This project is a Python learning project designed to demonstrate data loading, validation, analysis, and reporting techniques. The results are based solely on the data contained in the project and should not be considered professional financial or accounting advice.
